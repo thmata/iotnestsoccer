@@ -1,10 +1,18 @@
+import FilterComponent from "@/components/FilterComponent";
+import ResultsComponent from "@/components/ResultsComponent";
 import TopBarComponent from "@/components/TopBarComponent";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <TopBarComponent />
-    </main>
+    <>
+      <header>
+        <TopBarComponent />
+      </header>
+      <main className="px-[5rem] h-[100%] flex mt-5 md:flex-row">
+        <FilterComponent />
+        <ResultsComponent />
+      </main>
+    </>
   );
 }
