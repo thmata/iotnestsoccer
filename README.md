@@ -71,6 +71,9 @@ $ yarn dev
 - Tratar melhor os erros de API quando exede o limite de requisições.
 - Melhorar SSR
 - Adicionar efeitos de transições em CSS.
-- Deploy Vercel
 - Remover TOKEN do projeto e usar a ENV
+
+## LINK PARA ACESSAR O PROJETO
+
+https://iotnestsoccer.vercel.app/
 
