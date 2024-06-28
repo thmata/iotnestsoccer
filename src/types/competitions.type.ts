@@ -52,6 +52,7 @@ export interface competitionsProps {
     name: string;
     emblem: string;
     id: number;
+    code: string;
 }
 
 export interface selectedOptionProps {
@@ -59,11 +60,18 @@ export interface selectedOptionProps {
         name: string;
         emblem: string;
         id: number;
+        code: string;
     }
     team?: {
         name: string;
         emblem: string;
         id: number;
+    }
+    match?: {
+        count?: number[];
+        selectedRound?: number;
+        matchSelected?: any;
+        listOfMatches?: any;
     }
 }
 
@@ -71,3 +79,4 @@ export interface DropdownCompetitionProps {
     setSelectedOption: React.Dispatch<React.SetStateAction<selectedOptionProps | undefined>>;
     selectedOption: selectedOptionProps | undefined;
 }
+

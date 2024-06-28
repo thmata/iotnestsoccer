@@ -5,7 +5,7 @@ import { RootTeam } from '@/types/teams.types';
 
 const DropdownTeams: React.FC<DropdownCompetitionProps> = ({ setSelectedOption, selectedOption }) => {
 
-    const [teams, setTeams] = useState<competitionsProps[]>([]);
+    const [teams, setTeams] = useState<any>([]);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +51,7 @@ const DropdownTeams: React.FC<DropdownCompetitionProps> = ({ setSelectedOption, 
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [selectedOption]);
+    }, [selectedOption?.competition]);
 
     return (
         <div ref={dropdownRef} className="relative mt-5">
@@ -62,7 +62,7 @@ const DropdownTeams: React.FC<DropdownCompetitionProps> = ({ setSelectedOption, 
             >
                 {selectedOption?.team ?
                     <div className="flex items-center p-1 cursor-pointer">
-                        <img className="w-7 h-7" src={selectedOption?.team?.emblem} alt={selectedOption?.team?.name} />
+                        {!(selectedOption?.team.id === 0) && <img className="w-7 h-7" src={selectedOption?.team?.emblem} alt={selectedOption?.team?.name} />}
                         <p className="pl-2">
                             {selectedOption?.team?.name}
                         </p>
@@ -70,8 +70,11 @@ const DropdownTeams: React.FC<DropdownCompetitionProps> = ({ setSelectedOption, 
                     : 'Selecione uma opção'}
             </div>
             {isOpen && (
-                <ul className="border border-gray-300 p-0 m-0 list-none absolute bg-white z-10 w-full">
-                    {teams.map((option, index) => (
+                <ul className="border border-gray-300 p-0 m-0 list-none absolute bg-white z-10 w-full max-h-60 overflow-y-auto">
+                    <div onClick={() => handleOptionClick("Todos", "todos", 0)} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
+                        <p>Todos</p>
+                    </div>
+                    {teams.map((option: any, index: any) => (
                         <div onClick={() => handleOptionClick(option.name, option.emblem, option.id)} key={index} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
                             <img className="w-9 h-9" src={option.emblem} alt={option.name} />
                             <li className="pl-2">

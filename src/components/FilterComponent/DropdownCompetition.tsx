@@ -16,12 +16,12 @@ const DropdownCompetition: React.FC<DropdownCompetitionProps> = ({ setSelectedOp
     async function getApiDataOnCLient() {
         try {
             const data = await getCompetitionList();
-            console.log("## data", data)
             var competitions: competitionsProps[] = data?.competitions?.map((competition) => {
                 return {
                     name: competition.name,
                     emblem: competition.emblem,
-                    id: competition.id
+                    id: competition.id,
+                    code: competition.code
                 }
             })
             setCompetitions(competitions)
@@ -30,12 +30,13 @@ const DropdownCompetition: React.FC<DropdownCompetitionProps> = ({ setSelectedOp
         }
     }
 
-    const handleOptionClick = (name: string, emblem: string, id: number) => {
+    const handleOptionClick = (name: string, emblem: string, id: number, code: string) => {
         setSelectedOption({
             competition: {
                 name,
                 emblem,
-                id
+                id,
+                code
             }
         });
         setIsOpen(false);
@@ -72,9 +73,9 @@ const DropdownCompetition: React.FC<DropdownCompetitionProps> = ({ setSelectedOp
                     : 'Selecione uma opção'}
             </div>
             {isOpen && (
-                <ul className="border border-gray-300 p-0 m-0 list-none absolute bg-white z-10 w-full">
+                <ul className="border border-gray-300 p-0 m-0 list-none absolute bg-white z-10 w-full max-h-60 overflow-y-auto">
                     {competitions.map((option, index) => (
-                        <div onClick={() => handleOptionClick(option.name, option.emblem, option.id)} key={index} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
+                        <div onClick={() => handleOptionClick(option.name, option.emblem, option.id, option.code)} key={index} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
                             <img className="w-9 h-9" src={option.emblem} alt={option.name} />
                             <li className="pl-2">
                                 {option.name}
