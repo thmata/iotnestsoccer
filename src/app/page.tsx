@@ -9,7 +9,7 @@ export default function Home() {
       <header>
         <TopBarComponent />
       </header>
-      <main className="px-[5rem] h-[100%] flex mt-5 md:flex-row">
+      <main className="px-[5rem] h-[100%] flex mt-5 flex-col">
         <FilterComponent />
         <ResultsComponent />
       </main>

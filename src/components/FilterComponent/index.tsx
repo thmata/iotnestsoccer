@@ -1,30 +1,23 @@
-'use client'
-import { getCompetitionList } from "@/services/api/api";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+"use client"
+import { useEffect, useState } from 'react';
+import { getCompetitionList, getCompetitionTeamList } from "@/services/api/api";
+import DropdownCompetition from './DropdownCompetition';
+import DropdownTeams from './DropdownTeams';
+import { competitionsProps, selectedOptionProps } from "@/types/competitions.type";
 
 export default function FilterComponent() {
+    const [selectedOption, setSelectedOption] = useState<selectedOptionProps>();
 
-    // const { data, isLoading } = useQuery({
-    //     queryKey: ["competitions"],
-    //     queryFn: getCompetitionList,
-    // })
 
-    // console.log("## data", data)
-
-    useEffect(() => {
-        const requisition = async () => {
-            const response = await getCompetitionList()
-            console.log("## response", response)
-        }
-
-        requisition()
-    }, [])
 
     return (
-        <div className="w-full md:w-1/4 p-4 bg-gray-100">
+        <div className="w-full p-4 bg-gray-100">
             <h2 className="text-xl font-bold mb-4">Filtros</h2>
+            <DropdownCompetition setSelectedOption={setSelectedOption} selectedOption={selectedOption} />
+            {selectedOption && selectedOption.competition &&
+                <DropdownTeams setSelectedOption={setSelectedOption} selectedOption={selectedOption} />}
 
         </div>
     );
 }
+
